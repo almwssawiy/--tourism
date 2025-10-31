@@ -15,7 +15,7 @@ const touristPlaces = [
         city: "بافاريا",
         category: "قصور",
         description: "قصر خيالي على قمة جبل في جبال الألب البافارية. ألهم تصميم قلعة ديزني الشهيرة ويعد من أجمل القصور في العالم.",
-        imageUrl: "https://upload.upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/800px-Schloss_Neuschwanstein_2013.jpg",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/800px-Schloss_Neuschwanstein_2013.jpg",
         coordinates: { lat: 47.5576, lng: 10.7498 }
     },
     {
@@ -24,7 +24,7 @@ const touristPlaces = [
         city: "كولونيا",
         category: "معالم دينية",
         description: "تحفة معمارية قوطية وأحد مواقع التراث العالمي لليونسكو. استغرق بناؤها أكثر من 600 عام وتعد من أطول الكنائس في العالم.",
-        imageUrl: "https://wikimedia.org/wiki/File:Dom_(Deutzer_Brücke).jpg",
+        imageUrl: "https://upload.wikimedia.org/wiki/File:Dom_(Deutzer_Brücke).jpg",
         coordinates: { lat: 50.9413, lng: 6.9583 }
     },
     {
@@ -452,6 +452,7 @@ const touristPlaces = [
     }
 
 ];
+
 
 
 
