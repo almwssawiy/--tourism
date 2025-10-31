@@ -18,7 +18,7 @@ function createPlaceCard(place) {
     
     card.innerHTML = `
         <div class="place-image-container">
-            <img src="${place.imageUrl}" alt="${place.name}" class="place-image" loading="lazy">
+            <img src="${place.imageUrl}" alt="${place.name}" class="place-image" loading=">
         </div>
         <div class="place-content">
             <h2 class="place-title">${place.name}</h2>
@@ -145,4 +145,5 @@ document.addEventListener('DOMContentLoaded', () => {
         if (canonicalLink) canonicalLink.href = currentUrl;
         if (ogUrl) ogUrl.content = currentUrl;
     }
+
 });
