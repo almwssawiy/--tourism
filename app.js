@@ -18,7 +18,7 @@ function createPlaceCard(place) {
     
     card.innerHTML = `
         <div class="place-image-container">
-            <img src="${place.imageUrl}" alt="${place.name}" class="place-image" loading=">
+            <img src="${place.imageUrl}" alt="${place.name}" class="place-image" loading="lazy">
         </div>
         <div class="place-content">
             <h2 class="place-title">${place.name}</h2>
@@ -147,3 +147,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
