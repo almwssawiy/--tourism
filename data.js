@@ -24,7 +24,7 @@ const touristPlaces = [
         city: "كولونيا",
         category: "معالم دينية",
         description: "تحفة معمارية قوطية وأحد مواقع التراث العالمي لليونسكو. استغرق بناؤها أكثر من 600 عام وتعد من أطول الكنائس في العالم.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Koelner_Dom_vom_KoelnTriangle.jpg/800px-Koelner_Dom_vom_KoelnTriangle.jpg",
+        imageUrl: "https://commons.wikimedia.org/w/index.php?search=كاتدرائية+كولونيا&title=Special%3AMediaSearch&type=image",
         coordinates: { lat: 50.9413, lng: 6.9583 }
     },
     {
@@ -450,4 +450,5 @@ const touristPlaces = [
         imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walibi_Belgium.jpg/800px-Walibi_Belgium.jpg",
         coordinates: { lat: 50.6989, lng: 4.5917 }
     }
+
 ];
