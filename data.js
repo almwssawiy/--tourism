@@ -1,459 +1,406 @@
-// بيانات الأماكن السياحية في ألمانيا
-const touristPlaces = [
-    {
-        id: 1,
-        name: "بوابة براندنبورغ",
-        city: "برلين",
-        category: "معالم تاريخية",
-        description: "رمز برلين التاريخي وأحد أشهر المعالم في ألمانيا. بُنيت في القرن الثامن عشر وتعتبر رمزاً للوحدة الألمانية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Brandenburger_Tor_abends.jpg/800px-Brandenburger_Tor_abends.jpg",
-        coordinates: { lat: 52.5163, lng: 13.3777 }
-    },
-    {
-        id: 2,
-        name: "قصر نويشفانشتاين",
-        city: "بافاريا",
-        category: "قصور",
-        description: "قصر خيالي على قمة جبل في جبال الألب البافارية. ألهم تصميم قلعة ديزني الشهيرة ويعد من أجمل القصور في العالم.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Schloss_Neuschwanstein_2013.jpg/800px-Schloss_Neuschwanstein_2013.jpg",
-        coordinates: { lat: 47.5576, lng: 10.7498 }
-    },
-    {
-        id: 3,
-        name: "كاتدرائية كولونيا",
-        city: "كولونيا",
-        category: "معالم دينية",
-        description: "تحفة معمارية قوطية وأحد مواقع التراث العالمي لليونسكو. استغرق بناؤها أكثر من 600 عام وتعد من أطول الكنائس في العالم.",
-        imageUrl: "https://upload.wikimedia.org/wiki/File:Dom_(Deutzer_Brücke).jpg",
-        coordinates: { lat: 50.9413, lng: 6.9583 }
-    },
-    {
-        id: 4,
-        name: "الغابة السوداء",
-        city: "بادن فورتمبيرغ",
-        category: "طبيعة",
-        description: "منطقة طبيعية خلابة مشهورة بغاباتها الكثيفة وقراها الساحرة. موطن كعكة الغابة السوداء الشهيرة والساعات الخشبية التقليدية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Schwarzwald_Mummelsee.jpg/800px-Schwarzwald_Mummelsee.jpg",
-        coordinates: { lat: 48.3, lng: 8.15 }
-    },
-    {
-        id: 5,
-        name: "جزيرة المتاحف",
-        city: "برلين",
-        category: "متاحف",
-        description: "مجمع متاحف عالمي يضم خمسة متاحف رئيسية على جزيرة في نهر شبريه. يحتوي على كنوز أثرية من مختلف الحضارات.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Museumsinsel_Panorama.jpg/800px-Museumsinsel_Panorama.jpg",
-        coordinates: { lat: 52.5169, lng: 13.4019 }
-    },
-    {
-        id: 6,
-        name: "قلعة هايدلبرغ",
-        city: "هايدلبرغ",
-        category: "قلاع",
-        description: "أطلال قلعة رومانسية تطل على نهر نيكار والمدينة القديمة. تجمع بين العمارة القوطية وعصر النهضة وتعد من أشهر الأطلال في ألمانيا.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Heidelberg_Castle.jpg/800px-Heidelberg_Castle.jpg",
-        coordinates: { lat: 49.4106, lng: 8.7153 }
-    },
-    {
-        id: 7,
-        name: "ميدان ماريان",
-        city: "ميونخ",
-        category: "ساحات",
-        description: "الساحة المركزية التاريخية في قلب ميونخ. تشتهر ببرجها الذي يحتوي على ساعة فلكية وأجراس موسيقية تعزف يومياً.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Marienplatz_Munich.jpg/800px-Marienplatz_Munich.jpg",
-        coordinates: { lat: 48.1374, lng: 11.5755 }
-    },
-    {
-        id: 8,
-        name: "جدار برلين",
-        city: "برلين",
-        category: "معالم تاريخية",
-        description: "نصب تذكاري لتاريخ ألمانيا المقسمة. الجزء المتبقي يُعرف بـ 'معرض الجانب الشرقي' ويحتوي على لوحات جدارية فنية شهيرة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/East_Side_Gallery.jpg/800px-East_Side_Gallery.jpg",
-        coordinates: { lat: 52.5058, lng: 13.4397 }
-    },
-    {
-        id: 9,
-        name: "قصر سانسوسي",
-        city: "بوتسدام",
-        category: "قصور",
-        description: "قصر صيفي فخم بُني في القرن الثامن عشر لفريدريك الكبير. يُعرف بـ 'فرساي الألمانية' ويحيط به حدائق رائعة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Sanssouci_Palace.jpg/800px-Sanssouci_Palace.jpg",
-        coordinates: { lat: 52.4042, lng: 13.0386 }
-    },
-    {
-        id: 10,
-        name: "وادي نهر الراين",
-        city: "راينلاند",
-        category: "طبيعة",
-        description: "منطقة خلابة مع قلاع قديمة وكروم عنب على ضفاف نهر الراين. أحد مواقع التراث العالمي وموطن أسطورة لوريلاي الشهيرة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Rhine_Valley.jpg/800px-Rhine_Valley.jpg",
-        coordinates: { lat: 50.1, lng: 7.6 }
-    },
-    {
-        id: 11,
-        name: "بوابة هولستن",
-        city: "لوبيك",
-        category: "معالم تاريخية",
-        description: "بوابة مدينة قوطية من الطوب الأحمر تعود للقرن الخامس عشر. رمز مدينة لوبيك وأحد أشهر معالم شمال ألمانيا.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Holstentor-Luebeck.jpg/800px-Holstentor-Luebeck.jpg",
-        coordinates: { lat: 53.8655, lng: 10.6764 }
-    },
-    {
-        id: 12,
-        name: "الحديقة الإنجليزية",
-        city: "ميونخ",
-        category: "حدائق",
-        description: "واحدة من أكبر الحدائق الحضرية في العالم، أكبر من سنترال بارك في نيويورك. تحتوي على بحيرات وجداول ومعبد صيني.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Englischer_Garten_Muenchen.jpg/800px-Englischer_Garten_Muenchen.jpg",
-        coordinates: { lat: 48.1642, lng: 11.6056 }
-    },
-    {
-        id: 13,
-        name: "قلعة فارتبورغ",
-        city: "آيزناخ",
-        category: "قلاع",
-        description: "قلعة تاريخية على قمة تل تعود للقرن الحادي عشر. مكان ترجم فيه مارتن لوثر الكتاب المقدس إلى الألمانية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Wartburg_Eisenach.jpg/800px-Wartburg_Eisenach.jpg",
-        coordinates: { lat: 50.9647, lng: 10.3119 }
-    },
-    {
-        id: 14,
-        name: "روتنبورغ أوب در تاوبر",
-        city: "بافاريا",
-        category: "مدن تاريخية",
-        description: "مدينة قروسطية محفوظة بشكل مثالي مع أسوار وأبراج كاملة. تبدو وكأنها خرجت من قصة خيالية بشوارعها المرصوفة بالحصى.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Rothenburg_ob_der_Tauber.jpg/800px-Rothenburg_ob_der_Tauber.jpg",
-        coordinates: { lat: 49.3779, lng: 10.1786 }
-    },
-    {
-        id: 15,
-        name: "جزيرة روغن",
-        city: "بحر البلطيق",
-        category: "شواطئ",
-        description: "أكبر جزيرة ألمانية مع شواطئ رملية بيضاء وجروف طباشيرية مذهلة. وجهة صيفية شهيرة على ساحل بحر البلطيق.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Ruegen_Kreidefelsen.jpg/800px-Ruegen_Kreidefelsen.jpg",
-        coordinates: { lat: 54.5264, lng: 13.3919 }
-    },
-    {
-        id: 16,
-        name: "Europa Park",
-        city: "روست",
-        category: "حدائق ترفيهية",
-        description: "أكبر حديقة ترفيهية في ألمانيا وثاني أكبر منتزه في أوروبا. يحتوي على أكثر من 100 لعبة وعرض موزعة على 18 منطقة أوروبية مختلفة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Europa-Park_Rust_2012.jpg/800px-Europa-Park_Rust_2012.jpg",
-        coordinates: { lat: 48.2662, lng: 7.7217 }
-    },
-    {
-        id: 17,
-        name: "Phantasialand",
-        city: "برول",
-        category: "حدائق ترفيهية",
-        description: "حديقة ترفيهية عالمية المستوى تشتهر بألعابها المثيرة وعوالمها الموضوعية المذهلة مثل Klugheim وChina Town.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Phantasialand_Bruehl_ChinaTown.jpg/800px-Phantasialand_Bruehl_ChinaTown.jpg",
-        coordinates: { lat: 50.7989, lng: 6.8797 }
-    },
-    {
-        id: 18,
-        name: "حديقة حيوان برلين",
-        city: "برلين",
-        category: "حدائق حيوان",
-        description: "أقدم حديقة حيوان في ألمانيا وأكثرها شهرة. تضم أكثر من 20,000 حيوان من 1,200 نوع مختلف، بما في ذلك الباندا العملاقة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Berlin_Zoo_Panda.jpg/800px-Berlin_Zoo_Panda.jpg",
-        coordinates: { lat: 52.5075, lng: 13.3375 }
-    },
-    {
-        id: 19,
-        name: "حديقة حيوان هاغنبيك",
-        city: "هامبورغ",
-        category: "حدائق حيوان",
-        description: "أول حديقة حيوان في العالم بدون أقفاص، تأسست عام 1907. تشتهر بتصميمها المبتكر وبيئاتها الطبيعية للحيوانات.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tierpark_Hagenbeck_Elephants.jpg/800px-Tierpark_Hagenbeck_Elephants.jpg",
-        coordinates: { lat: 53.5947, lng: 9.9386 }
-    },
-    {
-        id: 20,
-        name: "Sea Life ميونخ",
-        city: "ميونخ",
-        category: "أكواريوم",
-        description: "أكواريوم ضخم يضم أكثر من 10,000 كائن بحري. يحتوي على نفق زجاجي يمر عبر حوض أسماك القرش.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Sea_Life_Munich_Tunnel.jpg/800px-Sea_Life_Munich_Tunnel.jpg",
-        coordinates: { lat: 48.1775, lng: 11.5456 }
-    },
-    {
-        id: 21,
-        name: "Legoland Deutschland",
-        city: "غونزبورغ",
-        category: "حدائق ترفيهية",
-        description: "حديقة ترفيهية مخصصة للعائلات مبنية بالكامل من مكعبات ليغو. تحتوي على 8 مناطق موضوعية و64 لعبة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Legoland_Deutschland_Entrance.jpg/800px-Legoland_Deutschland_Entrance.jpg",
-        coordinates: { lat: 48.4244, lng: 10.2989 }
-    },
-    {
-        id: 22,
-        name: "Tropical Islands",
-        city: "براند",
-        category: "متنزهات",
-        description: "أكبر منتجع استوائي داخلي في العالم، يقع في قبة ضخمة كانت سابقاً حظيرة طائرات. يحتوي على شواطئ رملية وغابات مطيرة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tropical_Islands_Resort.jpg/800px-Tropical_Islands_Resort.jpg",
-        coordinates: { lat: 52.0389, lng: 13.7486 }
-    },
-    {
-        id: 23,
-        name: "حديقة حيوان ميونخ (Tierpark Hellabrunn)",
-        city: "ميونخ",
-        category: "حدائق حيوان",
-        description: "أول حديقة حيوان جغرافية في العالم، حيث تُجمع الحيوانات حسب قاراتها الأصلية. تقع في موقع طبيعي خلاب على نهر إيزار.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Tierpark_Hellabrunn_Munich.jpg/800px-Tierpark_Hellabrunn_Munich.jpg",
-        coordinates: { lat: 48.0989, lng: 11.5564 }
-    },
-    {
-        id: 24,
-        name: "Movie Park Germany",
-        city: "بوتروب",
-        category: "حدائق ترفيهية",
-        description: "حديقة ترفيهية بموضوع هوليوود والأفلام. تحتوي على ألعاب مثيرة وعروض حية مستوحاة من أفلام شهيرة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Movie_Park_Germany_Entrance.jpg/800px-Movie_Park_Germany_Entrance.jpg",
-        coordinates: { lat: 51.6167, lng: 6.9758 }
-    },
-    {
-        id: 25,
-        name: "Heide Park",
-        city: "سولتاو",
-        category: "حدائق ترفيهية",
-        description: "ثاني أكبر حديقة ترفيهية في ألمانيا. تشتهر بألعابها المثيرة مثل Colossos وKrake.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Heide_Park_Colossos.jpg/800px-Heide_Park_Colossos.jpg",
-        coordinates: { lat: 53.0236, lng: 9.8781 }
-    },
-    {
-        id: 26,
-        name: "برج التلفزيون في برلين",
-        city: "برلين",
-        category: "معالم تاريخية",
-        description: "أطول مبنى في ألمانيا بارتفاع 368 متر. يحتوي على مطعم دوار يوفر إطلالة بانورامية 360 درجة على المدينة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Fernsehturm_Berlin.jpg/800px-Fernsehturm_Berlin.jpg",
-        coordinates: { lat: 52.5208, lng: 13.4094 }
-    },
-    {
-        id: 27,
-        name: "قصر نيمفنبورغ",
-        city: "ميونخ",
-        category: "قصور",
-        description: "قصر صيفي باروكي فخم كان مقر إقامة حكام بافاريا. يحيط به حديقة واسعة على الطراز الإنجليزي.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Nymphenburg_Palace.jpg/800px-Nymphenburg_Palace.jpg",
-        coordinates: { lat: 48.1583, lng: 11.5033 }
-    },
-    {
-        id: 28,
-        name: "قلعة هوهنتسولرن",
-        city: "بادن فورتمبيرغ",
-        category: "قلاع",
-        description: "قلعة رائعة على قمة جبل، مقر عائلة هوهنتسولرن الملكية. تعد من أجمل القلاع في أوروبا.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Hohenzollern_Castle.jpg/800px-Hohenzollern_Castle.jpg",
-        coordinates: { lat: 48.3236, lng: 8.9672 }
-    },
-    {
-        id: 29,
-        name: "متحف BMW",
-        city: "ميونخ",
-        category: "متاحف",
-        description: "متحف مخصص لتاريخ شركة BMW. يعرض سيارات ودراجات نارية كلاسيكية وحديثة في مبنى معماري مذهل.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/BMW_Museum_Munich.jpg/800px-BMW_Museum_Munich.jpg",
-        coordinates: { lat: 48.1769, lng: 11.5589 }
-    },
-    {
-        id: 30,
-        name: "ميناء هامبورغ",
-        city: "هامبورغ",
-        category: "معالم تاريخية",
-        description: "أكبر ميناء في ألمانيا وثاني أكبر ميناء في أوروبا. منطقة Speicherstadt التاريخية مدرجة على قائمة التراث العالمي.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Hamburg_Harbor.jpg/800px-Hamburg_Harbor.jpg",
-        coordinates: { lat: 53.5436, lng: 9.9764 }
-    },
-    {
-        id: 31,
-        name: "قصر فورتسبورغ",
-        city: "فورتسبورغ",
-        category: "قصور",
-        description: "تحفة معمارية باروكية وأحد أجمل القصور في أوروبا. يحتوي على أكبر لوحة سقف في العالم رسمها تيبولو.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Wuerzburg_Residence.jpg/800px-Wuerzburg_Residence.jpg",
-        coordinates: { lat: 49.7931, lng: 9.9364 }
-    },
-    {
-        id: 32,
-        name: "كنيسة فريدريش",
-        city: "دريسدن",
-        category: "معالم دينية",
-        description: "كنيسة باروكية لوثرية أعيد بناؤها بعد الحرب العالمية الثانية. رمز للمصالحة والسلام.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Frauenkirche_Dresden.jpg/800px-Frauenkirche_Dresden.jpg",
-        coordinates: { lat: 51.0519, lng: 13.7414 }
-    },
-    {
-        id: 33,
-        name: "حديقة بوتسدام",
-        city: "بوتسدام",
-        category: "حدائق",
-        description: "مجموعة من القصور والحدائق الملكية مدرجة على قائمة التراث العالمي. تشمل قصر سانسوسي وقصر الأورانجري.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Potsdam_Parks.jpg/800px-Potsdam_Parks.jpg",
-        coordinates: { lat: 52.4, lng: 13.0667 }
-    },
-    {
-        id: 34,
-        name: "متحف مرسيدس بنز",
-        city: "شتوتغارت",
-        category: "متاحف",
-        description: "متحف يروي تاريخ السيارات من 1886 حتى اليوم. يعرض أكثر من 160 سيارة في مبنى حلزوني مبتكر.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mercedes-Benz_Museum.jpg/800px-Mercedes-Benz_Museum.jpg",
-        coordinates: { lat: 48.7886, lng: 9.2328 }
-    },
-    {
-        id: 35,
-        name: "جزيرة لينداو",
-        city: "بحيرة كونستانس",
-        category: "مدن تاريخية",
-        description: "جزيرة ساحرة في بحيرة كونستانس مع مدينة قديمة محفوظة بشكل جميل. تشتهر بميناءها مع تمثال الأسد والمنارة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Lindau_Island.jpg/800px-Lindau_Island.jpg",
-        coordinates: { lat: 47.5456, lng: 9.6839 }
-    },
-    {
-        id: 36,
-        name: "Grand Place بروكسل",
-        city: "بروكسل",
-        category: "ساحات",
-        description: "الساحة المركزية في بروكسل وأحد أجمل الساحات في أوروبا. محاطة بمباني قوطية وباروكية مذهلة ومدرجة على قائمة التراث العالمي.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Grand_Place_Brussels.jpg/800px-Grand_Place_Brussels.jpg",
-        coordinates: { lat: 50.8467, lng: 4.3525 }
-    },
-    {
-        id: 37,
-        name: "Atomium",
-        city: "بروكسل",
-        category: "معالم تاريخية",
-        description: "نصب تذكاري على شكل ذرة حديد مكبرة 165 مليار مرة. بُني لمعرض إكسبو 1958 وأصبح رمز بروكسل.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Atomium_Brussels.jpg/800px-Atomium_Brussels.jpg",
-        coordinates: { lat: 50.8950, lng: 4.3417 }
-    },
-    {
-        id: 38,
-        name: "Manneken Pis",
-        city: "بروكسل",
-        category: "معالم تاريخية",
-        description: "تمثال برونزي صغير لطفل يتبول، أصبح رمزاً لروح الدعابة البلجيكية. يُلبس أزياء مختلفة في المناسبات.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Manneken_Pis.jpg/800px-Manneken_Pis.jpg",
-        coordinates: { lat: 50.8450, lng: 4.3500 }
-    },
-    {
-        id: 39,
-        name: "المدينة القديمة في بروج",
-        city: "بروج",
-        category: "مدن تاريخية",
-        description: "مدينة قروسطية ساحرة تُلقب بـ'فينيسيا الشمال'. قنواتها المائية ومبانيها القوطية تجعلها من أجمل المدن الأوروبية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Bruges_Old_Town.jpg/800px-Bruges_Old_Town.jpg",
-        coordinates: { lat: 51.2093, lng: 3.2247 }
-    },
-    {
-        id: 40,
-        name: "برج الجرس في بروج",
-        city: "بروج",
-        category: "معالم تاريخية",
-        description: "برج قوطي يبلغ ارتفاعه 83 متر مع 47 جرساً. يوفر إطلالة بانورامية على المدينة بعد صعود 366 درجة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Belfry_of_Bruges.jpg/800px-Belfry_of_Bruges.jpg",
-        coordinates: { lat: 51.2083, lng: 3.2247 }
-    },
-    {
-        id: 41,
-        name: "قلعة غرافنستين",
-        city: "غنت",
-        category: "قلاع",
-        description: "قلعة قروسطية محفوظة بشكل رائع من القرن الثاني عشر. تحتوي على متحف للأسلحة وغرف تعذيب تاريخية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Gravensteen_Castle_Ghent.jpg/800px-Gravensteen_Castle_Ghent.jpg",
-        coordinates: { lat: 51.0575, lng: 3.7203 }
-    },
-    {
-        id: 42,
-        name: "كاتدرائية أنتويرب",
-        city: "أنتويرب",
-        category: "معالم دينية",
-        description: "أكبر كنيسة قوطية في بلجيكا وأحد مواقع التراث العالمي. تحتوي على لوحات لروبنز وبرج يبلغ ارتفاعه 123 متر.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Antwerp_Cathedral.jpg/800px-Antwerp_Cathedral.jpg",
-        coordinates: { lat: 51.2203, lng: 4.4014 }
-    },
-    {
-        id: 43,
-        name: "متحف ماغريت",
-        city: "بروكسل",
-        category: "متاحف",
-        description: "متحف مخصص للفنان السريالي البلجيكي رينيه ماغريت. يضم أكبر مجموعة من أعماله في العالم.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Magritte_Museum_Brussels.jpg/800px-Magritte_Museum_Brussels.jpg",
-        coordinates: { lat: 50.8425, lng: 4.3583 }
-    },
-    {
-        id: 44,
-        name: "متحف الشوكولاتة البلجيكية",
-        city: "بروكسل",
-        category: "متاحف",
-        description: "متحف تفاعلي يروي تاريخ الشوكولاتة البلجيكية الشهيرة. يتضمن عروض تحضير الشوكولاتة وتذوق مجاني.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Belgian_Chocolate_Museum.jpg/800px-Belgian_Chocolate_Museum.jpg",
-        coordinates: { lat: 50.8467, lng: 4.3542 }
-    },
-    {
-        id: 45,
-        name: "قصر العدل في بروكسل",
-        city: "بروكسل",
-        category: "معالم تاريخية",
-        description: "أكبر مبنى قضائي في العالم بُني في القرن التاسع عشر. تصميمه المعماري الضخم يهيمن على أفق المدينة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Palace_of_Justice_Brussels.jpg/800px-Palace_of_Justice_Brussels.jpg",
-        coordinates: { lat: 50.8367, lng: 4.3511 }
-    },
-    {
-        id: 46,
-        name: "حديقة سينكونتينير",
-        city: "بروكسل",
-        category: "حدائق",
-        description: "أكبر حديقة عامة في بروكسل تحتوي على قوس النصر الضخم ومتاحف فنية. مكان مثالي للنزهات والفعاليات.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Cinquantenaire_Park.jpg/800px-Cinquantenaire_Park.jpg",
-        coordinates: { lat: 50.8408, lng: 4.3917 }
-    },
-    {
-        id: 47,
-        name: "Mini-Europe",
-        city: "بروكسل",
-        category: "متنزهات",
-        description: "حديقة مصغرة تحتوي على نماذج مصغرة لأشهر معالم أوروبا بمقياس 1:25. تضم أكثر من 350 مبنى.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Mini-Europe_Brussels.jpg/800px-Mini-Europe_Brussels.jpg",
-        coordinates: { lat: 50.8947, lng: 4.3414 }
-    },
-    {
-        id: 48,
-        name: "قناة غنت",
-        city: "غنت",
-        category: "معالم تاريخية",
-        description: "قنوات مائية تاريخية تمر عبر قلب المدينة القديمة. رحلات القوارب توفر منظوراً فريداً للمباني القروسطية.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Ghent_Canals.jpg/800px-Ghent_Canals.jpg",
-        coordinates: { lat: 51.0543, lng: 3.7174 }
-    },
-    {
-        id: 49,
-        name: "محطة أنتويرب المركزية",
-        city: "أنتويرب",
-        category: "معالم تاريخية",
-        description: "واحدة من أجمل محطات القطار في العالم. تصميمها المعماري الفخم يجمع بين عدة أنماط من القرن العشرين.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Antwerp_Central_Station.jpg/800px-Antwerp_Central_Station.jpg",
-        coordinates: { lat: 51.2172, lng: 4.4214 }
-    },
-    {
-        id: 50,
-        name: "Walibi Belgium",
-        city: "وافر",
-        category: "حدائق ترفيهية",
-        description: "أكبر حديقة ترفيهية في بلجيكا مع أكثر من 40 لعبة مثيرة. تشتهر بألعاب الرولر كوستر المائية والجافة.",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Walibi_Belgium.jpg/800px-Walibi_Belgium.jpg",
-        coordinates: { lat: 50.6989, lng: 4.5917 }
+// ========== متغيرات عامة ==========
+let allPlaces = touristPlaces;
+let filteredPlaces = allPlaces;
+
+// ========== عناصر DOM ==========
+const placesGrid = document.getElementById('placesGrid');
+const placesCount = document.getElementById('placesCount');
+const noResults = document.getElementById('noResults');
+const citySearch = document.getElementById('citySearch');
+const categorySearch = document.getElementById('categorySearch');
+const resetBtn = document.getElementById('resetBtn');
+
+// ========== ثوابت ==========
+const PLACEHOLDER_IMAGE =
+  'data:image/svg+xml;utf8,' + encodeURIComponent(`
+    <svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="bgGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#DD0000;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#FFCE00;stop-opacity:1" />
+        </linearGradient>
+        <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+          <feOffset dx="0" dy="4" result="offsetblur"/>
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.3"/>
+          </feComponentTransfer>
+          <feMerge>
+            <feMergeNode/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <rect width="800" height="600" fill="url(#bgGradient)"/>
+      <circle cx="400" cy="300" r="120" fill="url(#circleGradient)" opacity="0.1"/>
+      <circle cx="400" cy="300" r="90" fill="url(#circleGradient)" opacity="0.15"/>
+      <g filter="url(#shadow)">
+        <polygon points="350,280 400,200 450,280 420,270 380,270" fill="#DD0000" opacity="0.8"/>
+        <circle cx="400" cy="190" r="25" fill="#FFCE00"/>
+        <circle cx="400" cy="190" r="18" fill="#FFE66D" opacity="0.8"/>
+      </g>
+      <rect x="300" y="340" width="200" height="6" rx="3" fill="#DD0000" opacity="0.3"/>
+      <rect x="320" y="360" width="160" height="4" rx="2" fill="#888" opacity="0.2"/>
+      <text x="400" y="430" text-anchor="middle" font-size="32" font-family="Segoe UI, Arial, sans-serif" font-weight="bold" fill="#333">الصورة غير متوفرة</text>
+      <text x="400" y="465" text-anchor="middle" font-size="20" font-family="Segoe UI, Arial, sans-serif" fill="#666">Bild nicht verfügbar</text>
+      <text x="400" y="500" text-anchor="middle" font-size="18" font-family="Segoe UI, Arial, sans-serif" fill="#666">🔄 انقر على إعادة المحاولة</text>
+    </svg>
+  `);
+
+// ========== دالة إنشاء Loading Spinner ==========
+function createLoadingSpinner() {
+    return `
+        <div class="image-loading-overlay">
+            <div class="image-loading-spinner"></div>
+        </div>
+    `;
+}
+
+// ========== دالة إنشاء Error Banner ==========
+function createErrorBanner(place, attemptType) {
+    let errorMessage = '';
+    switch(attemptType) {
+        case 'original':
+            errorMessage = '⚠️ جاري تحميل الصورة الاحتياطية...';
+            break;
+        case 'local':
+            errorMessage = '❌ فشل تحميل الصورة المحلية';
+            break;
+        case 'all-failed':
+            errorMessage = '❌ فشل تحميل جميع الصور';
+            break;
+        default:
+            errorMessage = '⚠️ خطأ في تحميل الصورة';
     }
+    
+    return `
+        <div class="image-error-banner" role="alert" aria-live="assertive">
+            <div>${errorMessage}</div>
+            <button class="retry-image-btn" data-place-id="${place.id}" aria-label="إعادة محاولة تحميل الصورة">🔄 إعادة المحاولة</button>
+        </div>
+    `;
+}
 
-];
+// ========== دالة إعادة محاولة تحميل الصورة ==========
+function retryImageLoad(placeId, imageElement, imageContainer) {
+    // إزالة جميع error banners الموجودة
+    const existingBanners = imageContainer.querySelectorAll('.image-error-banner');
+    existingBanners.forEach(banner => banner.remove());
+    
+    // إزالة جميع loading overlays الموجودة قبل إضافة واحد جديد
+    const existingOverlays = imageContainer.querySelectorAll('.image-loading-overlay');
+    existingOverlays.forEach(overlay => overlay.remove());
+    
+    // إعادة تعيين الحالة
+    imageElement.dataset.fallbackAttempted = '';
+    imageElement.dataset.fallbackApplied = '';
+    
+    // إزالة classes
+    imageElement.classList.remove('image-fallback', 'using-local-fallback');
+    imageContainer.classList.remove('error');
+    
+    // إضافة loading spinner باستخدام DOM-safe method
+    imageContainer.insertAdjacentHTML('beforeend', createLoadingSpinner());
+    imageContainer.classList.add('loading');
+    
+    // البحث عن المكان
+    const place = touristPlaces.find(p => p.id === placeId);
+    if (!place) {
+        console.error(`❌ لم يتم العثور على المكان برقم: ${placeId}`);
+        return;
+    }
+    
+    // إعادة تعيين الصورة
+    imageElement.src = place.imageUrl;
+    
+    // تسجيل الرسالة
+    console.log(`🔄 إعادة محاولة تحميل الصورة للمكان: ${place.name}`);
+}
 
+// ========== دالة إنشاء بطاقة مكان ==========
+// تنشئ بطاقة HTML لكل مكان سياحي مع:
+// - صورة مع نظام fallback ذكي (URL أصلي → صورة محلية → placeholder)
+// - عنوان ووصف المكان
+// - معلومات المدينة والفئة
+// - معالجة أخطاء تحميل الصور تلقائياً
+function createPlaceCard(place) {
+    const card = document.createElement('div');
+    card.className = 'place-card';
+    card.setAttribute('data-category', place.category);
+    card.innerHTML = `
+        <div class="place-image-container">
+            <img src="${place.imageUrl}" alt="${place.name}" class="place-image" loading="lazy">
+        </div>
+        <div class="place-content">
+            <h2 class="place-title">${place.name}</h2>
+            <span class="place-city">📍 ${place.city}</span>
+            <p class="place-description">${place.description}</p>
+            <span class="place-category">${place.category}</span>
+        </div>
+    `;
+    
+    // ========== إضافة Loading Spinner عند إنشاء البطاقة ==========
+    const imageContainer = card.querySelector('.place-image-container');
+    // إزالة أي overlays موجودة قبل إضافة واحد جديد
+    const existingOverlays = imageContainer.querySelectorAll('.image-loading-overlay');
+    existingOverlays.forEach(overlay => overlay.remove());
+    imageContainer.insertAdjacentHTML('beforeend', createLoadingSpinner());
+    imageContainer.classList.add('loading');
+    
+    // ========== معالجة أخطاء تحميل الصور بنظام fallback متعدد المستويات ==========
+    // المستوى 1: محاولة تحميل الصورة من URL الأصلي (Unsplash/Wikimedia)
+    // المستوى 2: محاولة تحميل الصورة الاحتياطية المحلية من مجلد images/
+    // المستوى 3: عرض placeholder SVG كحل أخير
+    const img = card.querySelector('.place-image');
+    if (img) {
+        // ========== معالج تحميل الصورة بنجاح ==========
+        img.onload = function() {
+            // إزالة loading spinner
+            const spinner = imageContainer.querySelector('.image-loading-overlay');
+            if (spinner) spinner.remove();
+            imageContainer.classList.remove('loading');
+            // إزالة error class عند نجاح التحميل
+            imageContainer.classList.remove('error');
+            
+            // تسجيل رسالة نجاح
+            console.log(`✅ تم تحميل الصورة بنجاح: ${place.name}`);
+        };
+        
+        // ========== معالج أخطاء تحميل الصورة ==========
+        img.onerror = function() {
+            // منع التكرار اللانهائي
+            if (img.dataset.fallbackApplied === 'true') return;
+            
+            // المستوى 2: محاولة تحميل الصورة المحلية
+            if (!img.dataset.fallbackAttempted) {
+                // التحقق من أن place.id صحيح قبل محاولة استخدامه
+                if (!Number.isFinite(place.id) || place.id <= 0) {
+                    console.group(`🖼️ معالجة صورة: ${place.name}`);
+                    console.warn(`❌ معرف المكان غير صالح للمكان: ${place.name}`);
+                    console.log(`🖼️ عرض placeholder SVG مباشرة`);
+                    console.groupEnd();
+                    
+                    // إزالة loading spinner
+                    const spinner = imageContainer.querySelector('.image-loading-overlay');
+                    if (spinner) spinner.remove();
+                    imageContainer.classList.remove('loading');
+                    
+                    img.src = PLACEHOLDER_IMAGE;
+                    img.classList.add('image-fallback');
+                    img.title = 'الصورة غير متوفرة - تم عرض صورة احتياطية';
+                    img.dataset.fallbackApplied = 'true';
+                    
+                    // إزالة أي banners موجودة قبل إضافة واحد جديد
+                    const existingBanners = imageContainer.querySelectorAll('.image-error-banner');
+                    existingBanners.forEach(banner => banner.remove());
+                    
+                    // إضافة error banner باستخدام DOM-safe method
+                    imageContainer.classList.add('error');
+                    imageContainer.insertAdjacentHTML('beforeend', createErrorBanner(place, 'all-failed'));
+                    return;
+                }
+                
+                // بناء مسار الصورة المحلية باستخدام document.baseURI لدعم النشر تحت مسارات فرعية
+                const base = document.baseURI || window.location.href;
+                const localImagePath = new URL(`images/place-${place.id}.jpg`, base).href;
+                
+                console.group(`🖼️ معالجة صورة: ${place.name}`);
+                console.log(`⚠️ فشل تحميل الصورة الأصلية`);
+                console.log(`🔄 جاري محاولة تحميل الصورة الاحتياطية المحلية`);
+                console.groupEnd();
+                
+                // إزالة loading spinner القديم
+                const spinner = imageContainer.querySelector('.image-loading-overlay');
+                if (spinner) spinner.remove();
+                imageContainer.classList.remove('loading');
+                
+                // إزالة أي banners موجودة قبل إضافة واحد جديد
+                const existingBanners = imageContainer.querySelectorAll('.image-error-banner');
+                existingBanners.forEach(banner => banner.remove());
+                
+                // إضافة error banner باستخدام DOM-safe method
+                imageContainer.insertAdjacentHTML('beforeend', createErrorBanner(place, 'original'));
+                imageContainer.classList.add('error');
+                
+                // بعد 500ms، أزل error banner وأضف loading spinner جديد
+                setTimeout(() => {
+                    const banner = imageContainer.querySelector('.image-error-banner');
+                    if (banner) banner.remove();
+                    // إزالة أي overlays موجودة قبل إضافة واحد جديد
+                    const existingOverlays = imageContainer.querySelectorAll('.image-loading-overlay');
+                    existingOverlays.forEach(overlay => overlay.remove());
+                    imageContainer.insertAdjacentHTML('beforeend', createLoadingSpinner());
+                    imageContainer.classList.add('loading');
+                }, 500);
+                
+                img.src = localImagePath;
+                img.dataset.fallbackAttempted = 'local';
+                img.classList.add('using-local-fallback');
+                return;
+            }
+            
+            // المستوى 3: عرض placeholder SVG
+            if (img.dataset.fallbackAttempted === 'local') {
+                console.group(`🖼️ معالجة صورة: ${place.name}`);
+                console.warn(`❌ فشل تحميل جميع الصور`);
+                console.warn(`📍 الصورة الأصلية: ${place.imageUrl}`);
+                console.warn(`📍 الصورة المحلية: ./images/place-${place.id}.jpg`);
+                console.log(`🖼️ عرض placeholder SVG`);
+                console.groupEnd();
+                
+                // إزالة loading spinner
+                const spinner = imageContainer.querySelector('.image-loading-overlay');
+                if (spinner) spinner.remove();
+                imageContainer.classList.remove('loading');
+                imageContainer.classList.add('error');
+                
+                img.src = PLACEHOLDER_IMAGE;
+                img.classList.remove('using-local-fallback');
+                img.classList.add('image-fallback');
+                img.title = 'الصورة غير متوفرة - تم عرض صورة احتياطية';
+                img.dataset.fallbackApplied = 'true';
+                
+                // إزالة أي banners موجودة قبل إضافة واحد جديد
+                const existingBanners = imageContainer.querySelectorAll('.image-error-banner');
+                existingBanners.forEach(banner => banner.remove());
+                
+                // إضافة error banner باستخدام DOM-safe method
+                imageContainer.insertAdjacentHTML('beforeend', createErrorBanner(place, 'all-failed'));
+            }
+        };
+    }
+    
+    // ========== إضافة Event Listener للـ Retry Button ==========
+    card.addEventListener('click', function(e) {
+        if (e.target.classList.contains('retry-image-btn')) {
+            const placeId = parseInt(e.target.dataset.placeId);
+            const img = card.querySelector('.place-image');
+            const imageContainer = card.querySelector('.place-image-container');
+            if (img && imageContainer) {
+                retryImageLoad(placeId, img, imageContainer);
+            }
+        }
+    });
+    
+    return card;
+}
 
+// ========== دالة عرض الأماكن ==========
+function displayPlaces(places) {
+    // مسح المحتوى السابق
+    placesGrid.innerHTML = '';
+    
+    // التحقق من وجود نتائج
+    if (places.length === 0) {
+        noResults.style.display = 'block';
+        placesCount.style.display = 'none';
+        return;
+    }
+    
+    noResults.style.display = 'none';
+    placesCount.style.display = 'block';
+    
+    // تحديث عداد الأماكن
+    placesCount.textContent = `✨ تم العثور على ${places.length} مكان سياحي`;
+    
+    // إضافة البطاقات
+    places.forEach(place => {
+        const card = createPlaceCard(place);
+        placesGrid.appendChild(card);
+    });
+    
+    // إضافة animation للبطاقات
+    const cards = document.querySelectorAll('.place-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+}
 
+// ========== دالة البحث والفلترة ========== 
+let debounceTimeout;
+function filterPlaces() {
+    const cityValue = citySearch.value.trim().toLowerCase();
+    const categoryValue = categorySearch.value;
+    filteredPlaces = allPlaces.filter(place => {
+        const matchCity = cityValue === '' || 
+                         place.city.toLowerCase().includes(cityValue) ||
+                         place.name.toLowerCase().includes(cityValue);
+        const matchCategory = categoryValue === '' || 
+                             place.category === categoryValue;
+        return matchCity && matchCategory;
+    });
+    displayPlaces(filteredPlaces);
+}
 
+// ========== دالة إعادة التعيين ==========
+function resetFilters() {
+    citySearch.value = '';
+    categorySearch.value = '';
+    filteredPlaces = allPlaces;
+    displayPlaces(filteredPlaces);
+}
 
+// ========== دالة البحث حسب المدينة ==========
+function searchByCity() {
+    filterPlaces();
+}
+
+// ========== دالة البحث حسب الفئة ==========
+function searchByCategory() {
+    filterPlaces();
+}
+
+// ========== Event Listeners ==========
+// البحث الفوري عند الكتابة
+citySearch.addEventListener('input', function() {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(filterPlaces, 250);
+});
+
+// البحث عند تغيير الفئة
+categorySearch.addEventListener('change', filterPlaces);
+
+// زر إعادة التعيين
+resetBtn.addEventListener('click', function() {
+    clearTimeout(debounceTimeout);
+    resetFilters();
+});
+
+// ========== تحميل الصفحة ==========
+document.addEventListener('DOMContentLoaded', () => {
+    // عرض جميع الأماكن عند تحميل الصفحة
+    displayPlaces(allPlaces);
+    
+    // إضافة تأثير smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+    
+    // رسالة ترحيب في console
+    console.log('%c🇩🇪 أهلاً أبو العباس في رحلاتك - تحياتي يونس', 
+                'color: #FFCE00; font-size: 20px; font-weight: bold; background: #000; padding: 10px;');
+    console.log('%cموقع الأماكن السياحية في ألمانيا', 
+                'color: #DD0000; font-size: 16px;');
+    
+    // تحديث تلقائي للروابط في الإنتاج (GitHub Pages)
+    if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+        const canonicalLink = document.querySelector('link[rel="canonical"]');
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        const currentUrl = window.location.href;
+        if (canonicalLink) canonicalLink.href = currentUrl;
+        if (ogUrl) ogUrl.content = currentUrl;
+    }
+});
